@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
       - name: Install devbox
         uses: jetify-com/devbox-install-action@v0.13.0
         with:

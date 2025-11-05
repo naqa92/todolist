@@ -1,7 +1,5 @@
 {
-  "packages": [
-    "python3.13-uv@0.7.22"
-  ],
+  "packages": [],
   "shell": {
     "init_hook": ["chmod +x ./scripts/run-units-tests.sh"],
     "scripts": {
