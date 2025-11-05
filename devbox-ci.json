@@ -1,0 +1,9 @@
+{
+  "packages": [],
+  "shell": {
+    "init_hook": ["chmod +x ./scripts/run-units-tests.sh"],
+    "scripts": {
+      "units-tests": ["./scripts/run-units-tests.sh"]
+    }
+  }
+}

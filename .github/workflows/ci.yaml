@@ -21,11 +21,26 @@ jobs:
           version: "latest"
           args: "check --output-format junit --output-file lint-report.xml"
 
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.13.0
+        with:
+          project-path: devbox-ci.json
+
+      - name: Run units tests with coverage
+        run: devbox run --config devbox-ci.json units-tests
+
       - name: Upload all reports and artifacts
         uses: actions/upload-artifact@v4
-        if: always() # Upload artifacts même en cas d'échec
+        if: always() # Upload artifacts even if tests fail
         with:
           name: ci-reports-${{ github.run_id }}
           path: |
             lint-report.xml
+            units-test-report.html
+            coverage-html/
           retention-days: 7
