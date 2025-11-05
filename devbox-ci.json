@@ -1,5 +1,7 @@
 {
-  "packages": [],
+  "packages": [
+    "uv@0.7.22"
+  ],
   "shell": {
     "init_hook": ["chmod +x ./scripts/run-units-tests.sh"],
     "scripts": {
