@@ -14,7 +14,7 @@ echo "Activating virtual environment..."
 . .venv/bin/activate # . is a shorthand for 'source'
 
 echo "Installing test dependencies..."
-cd ../app && uv sync --active --all-extras
+cd app && uv sync --active --all-extras
 
 echo "Running unit tests with pytest, coverage and HTML reports..."
 cd tests && python -m pytest units.py \
