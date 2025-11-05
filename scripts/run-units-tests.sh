@@ -22,7 +22,7 @@ cd tests && python -m pytest units.py \
   --tb=short \
   --cov=main \
   --cov-config=../pyproject.toml \
-  --cov-report=html:./coverage-html \
+  --cov-report=html:../../coverage-html \
   --cov-report=term \
-  --html=./units-test-report.html \
+  --html=../../units-test-report.html \
   --self-contained-html
