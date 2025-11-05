@@ -10,3 +10,18 @@ dependencies = [
     "gunicorn==23.0.0",
     "psycopg2-binary==2.9.10",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "ruff==0.14.3",
+]
+
+[tool.ruff]
+# Configuration minimale pour Ruff
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+# Ignorer E402 (module level import not at top of file) dans les tests
+per-file-ignores = { "tests/*.py" = ["E402"] }
+
