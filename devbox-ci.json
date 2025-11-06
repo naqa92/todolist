@@ -1,9 +1,12 @@
 {
   "packages": [],
   "shell": {
-    "init_hook": ["chmod +x ./scripts/run-units-tests.sh"],
+    "init_hook": [
+      "chmod +x ./scripts/run-units-tests.sh && chmod +x ./scripts/run-regression-tests.sh"
+    ],
     "scripts": {
-      "units-tests": ["./scripts/run-units-tests.sh"]
+      "units-tests": ["./scripts/run-units-tests.sh"],
+      "regression-tests": ["./scripts/run-regression-tests.sh"]
     }
   }
 }

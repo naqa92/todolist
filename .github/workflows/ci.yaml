@@ -37,6 +37,9 @@ jobs:
       - name: Run units tests with coverage
         run: devbox run --config devbox-ci.json units-tests
 
+      - name: Run regression tests
+        run: devbox run --config devbox-ci.json regression-tests
+
       - name: Upload all reports and artifacts
         uses: actions/upload-artifact@v4
         if: always() # Upload artifacts even if tests fail
@@ -45,5 +48,6 @@ jobs:
           path: |
             lint-report.xml
             units-test-report.html
+            regression-test-report.html
             coverage-html/
           retention-days: 7
