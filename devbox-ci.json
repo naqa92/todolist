@@ -2,11 +2,12 @@
   "packages": [],
   "shell": {
     "init_hook": [
-      "chmod +x ./scripts/run-units-tests.sh && chmod +x ./scripts/run-regression-tests.sh"
+      "chmod +x ./scripts/run-units-tests.sh && chmod +x ./scripts/run-regression-tests.sh && chmod +x ./scripts/run-smoke-test.sh"
     ],
     "scripts": {
       "units-tests": ["./scripts/run-units-tests.sh"],
-      "regression-tests": ["./scripts/run-regression-tests.sh"]
+      "regression-tests": ["./scripts/run-regression-tests.sh"],
+      "smoke-test": ["./scripts/run-smoke-test.sh"]
     }
   }
 }
