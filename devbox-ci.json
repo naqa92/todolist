@@ -1,5 +1,14 @@
 {
-  "packages": [],
+  "packages": [
+    "kind@0.29.0",
+    "kubectl@1.33.3",
+    "kubecolor@0.5.1",
+    "kubectx@0.9.5",
+    "krew@0.4.5",
+    "k9s@0.50.9",
+    "kubernetes-helm@3.18.4",
+    "go-task@3.43.3"
+  ],
   "shell": {
     "init_hook": [
       "chmod +x ./scripts/run-units-tests.sh && chmod +x ./scripts/run-regression-tests.sh && chmod +x ./scripts/run-smoke-test.sh"
