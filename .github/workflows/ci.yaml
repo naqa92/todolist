@@ -90,6 +90,11 @@ jobs:
           DATABASE_HOST: ${{ steps.create-database.outputs.db_host }}
           DATABASE_PASSWORD: ${{ steps.create-database.outputs.password }}
 
+      - name: Run integration tests
+        run: devbox run --config devbox-ci.json integration-tests
+        env:
+          DATABASE_URL: ${{ steps.create-database.outputs.db_url }}
+
       - name: Delete Neon branch
         uses: neondatabase/delete-branch-action@v3
         if: always()
@@ -108,4 +113,5 @@ jobs:
             units-test-report.html
             regression-test-report.html
             coverage-html/
+            integration-test-report.html
           retention-days: 7
