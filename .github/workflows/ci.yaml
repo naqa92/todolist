@@ -75,6 +75,29 @@ jobs:
           tags: |
             ghcr.io/${{ github.actor }}/todolist:latest
 
+      - name: Create Neon branch
+        uses: neondatabase/create-branch-action@v6
+        id: create-database
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch_name: todolist/${{ github.run_id }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+      - name: Minimal deployment
+        run: devbox run --config devbox-ci.json minimal-deployment
+        env:
+          DATABASE_URL: ${{ steps.create-database.outputs.db_url }}
+          DATABASE_HOST: ${{ steps.create-database.outputs.db_host }}
+          DATABASE_PASSWORD: ${{ steps.create-database.outputs.password }}
+
+      - name: Delete Neon branch
+        uses: neondatabase/delete-branch-action@v3
+        if: always()
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch: todolist/${{ github.run_id }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+
       - name: Upload all reports and artifacts
         uses: actions/upload-artifact@v4
         if: always() # Upload artifacts even if tests fail

@@ -2,10 +2,6 @@
   "packages": [
     "kind@0.29.0",
     "kubectl@1.33.3",
-    "kubecolor@0.5.1",
-    "kubectx@0.9.5",
-    "krew@0.4.5",
-    "k9s@0.50.9",
     "kubernetes-helm@3.18.4",
     "go-task@3.43.3"
   ],
@@ -16,7 +12,8 @@
     "scripts": {
       "units-tests": ["./scripts/run-units-tests.sh"],
       "regression-tests": ["./scripts/run-regression-tests.sh"],
-      "smoke-test": ["./scripts/run-smoke-test.sh"]
+      "smoke-test": ["./scripts/run-smoke-test.sh"],
+      "minimal-deployment": ["task cluster-create"]
     }
   }
 }
