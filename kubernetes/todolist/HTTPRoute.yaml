@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: todolist-route
+  labels:
+    app.kubernetes.io/name: todolist
+spec:
+  parentRefs:
+    - name: todolist-gateway
+      sectionName: http
+  hostnames:
+    - todolist.127.0.0.1.sslip.io
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: todolist
+          port: 5000

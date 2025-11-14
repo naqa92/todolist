@@ -7,7 +7,7 @@ tasks:
       - task: cluster-create-kind
       - task: wait-cluster-ready
       - task: load-docker-image
-      - task: install-ingress-nginx
+      - task: install-nginx-gateway
       - task: install-atlas-operator
       - task: deploy-app
       - echo "Fin du Déploiement"
@@ -34,13 +34,12 @@ tasks:
         kind load docker-image "$IMAGE_NAME"
     internal: true
 
-  install-ingress-nginx:
-    desc: Installe le contrôleur d'ingress NGINX
+  install-nginx-gateway:
+    desc: Installe NGINX Gateway Fabric avec les CRDs du Gateway API
     cmds:
-      - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-      - helm repo update
-      - helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace -f ./kubernetes/nginx-values.yaml
-      - kubectl -n ingress-nginx wait --for=condition=Available deployment/ingress-nginx-controller
+      - kubectl kustomize https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.2.0 | kubectl apply -f -
+      - helm install ngf oci://ghcr.io/nginx/charts/nginx-gateway-fabric --create-namespace -n nginx-gateway -f ./kubernetes/nginx-values.yaml
+      - kubectl -n nginx-gateway wait --for=condition=Available deployment/nginx-gateway
     internal: true
 
   install-atlas-operator:
@@ -63,14 +62,14 @@ tasks:
       - kubectl -n demo wait --for=condition=Ready atlasschema/todos --timeout=120s
       - kubectl -n demo apply -f ./kubernetes/todolist
       - kubectl -n demo wait --for=condition=Ready pod -l app.kubernetes.io/name=todolist --timeout=120s
-      - echo "Attente de la configuration de l'ingress..."
+      - echo "Attente de la configuration du Gateway API..."
       - |
         for i in {1..30}; do
           if curl -sf http://todolist.127.0.0.1.sslip.io/ > /dev/null 2>&1; then
-            echo "✓ Application accessible via l'ingress"
+            echo "✓ Application accessible via le Gateway API"
             exit 0
           fi
-          echo "Tentative $i/30 - En attente de l'ingress..."
+          echo "Tentative $i/30 - En attente du Gateway API..."
           sleep 2
         done
         echo "L'accès à todolist.127.0.0.1.sslip.io a échoué après 30 tentatives"
