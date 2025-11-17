@@ -20,7 +20,7 @@ FROM python:3.13-slim
 WORKDIR /app
 
 # Install curl for healthcheck
-RUN apt-get update && apt-get install -y --no-install-recommends curl=8.14.1-2 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends curl=8.14.1-2+deb13u2 && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user
 RUN groupadd -r appuser && useradd -r -g appuser appuser

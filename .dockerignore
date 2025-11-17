@@ -1,0 +1,15 @@
+# Python cache and virtual environments
+app/__pycache__
+app/.venv
+app/.pytest_cache
+app/.python-version
+
+# Project files
+app/.gitignore
+app/.env
+
+# Test directory
+app/tests
+
+# Instance directory
+app/instance
